@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import { useShop } from "../context/ShopContext";
 import ProductItems from "../components/ProductItems";
+import { useNavigate } from "react-router-dom";
 
 const Collection = () => {
-  const { products } = useShop();
+  const { products,search,showSearch } = useShop();
   const [ProductCollection, setProductCollection] = useState([]);
   const [showFilter, setShowFilter] = useState(false); // Boolean state for filter visibility
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
+  const [sortType,setSortType] = useState('relevant')
 
   const toggleCategory = (event) => {
     const value = event.target.value; // No destructuring
@@ -31,6 +33,11 @@ const Collection = () => {
     // 1️⃣ Create a copy of the original products array
     // This ensures we do not modify the original product list.
     let filteredProduct = [...products];
+
+    //for searching the content from serachbox
+    if(showSearch && search){
+      filteredProduct=filteredProduct.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    }
   
     // 2️⃣ Filter by selected category (if any)
     if (category.length > 0) {
@@ -50,6 +57,30 @@ const Collection = () => {
     // This will re-render the component to show only the filtered products.
     setProductCollection(filteredProduct);
   };
+
+  const sortPrice = () =>{
+    let sortProduct = [...ProductCollection]
+
+    switch (sortType) {
+      case 'lowToHigh':
+        setProductCollection(sortProduct.sort((a,b)=>a.price-b.price))
+        break;
+    
+      case 'highToLow':
+        setProductCollection(sortProduct.sort((a,b)=>b.price-a.price))
+        break;
+
+      default:
+        applyFilter()
+        break;
+    }
+
+  }
+
+  const navigate = useNavigate();
+  const handleClick = (_id) => {
+    navigate(`/Product/${_id}`);
+  };
   
   
   useEffect(() => {
@@ -58,11 +89,12 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory]); // Ensure products are considered
+  }, [category, subCategory,search,showSearch]); // Ensure products are considered
 
-  // console.log("Rendering ProductCollection:", ProductCollection);
+  useEffect(()=>{
+    sortPrice();
+  },[sortType])
 
-  
   return (
     <div className="grid md:grid-cols-[1fr_3fr]  pt-10 gap-6">
       {/* Left side */}
@@ -179,7 +211,9 @@ const Collection = () => {
 
           <div className="mb-4 ">
             {/* <label className="mr-2 font-semibold"></label> */}
-            <select className="border border-gray-300 px-1 text-base py-2   rounded-sm">
+            <select  
+            onChange={(e)=>setSortType(e.target.value)}
+            className="border border-gray-300 px-1 text-base py-2   rounded-sm">
               <option value="lowToHigh">Sort by: Relavent</option>
               <option value="lowToHigh">Sort by: Low to High</option>
               <option value="highToLow">Sort by: High to Low</option>
@@ -191,6 +225,7 @@ const Collection = () => {
           {ProductCollection.map((item, index) => {
             return (
               <ProductItems
+              onClick={() => handleClick(item._id)}
                 key={index}
                 id={item._id}
                 image={item.image}

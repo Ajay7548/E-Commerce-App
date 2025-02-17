@@ -13,6 +13,8 @@ import React, { useState } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import SearchBox from './components/SearchBox'
+import { ToastContainer,toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const  App = () => {
@@ -27,29 +29,17 @@ const  App = () => {
   return (
     <>
       <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+        <ToastContainer />
+        <Navbar />
+        <SearchBox/>
         
-      {/* <div className='px-[10%]'> */}
-        {/* Navbar will be display in all pages */}
-        <Navbar toggleSearch={toggleSearch} />
-        {isSearchVisible && (
-          <SearchBox isSearchVisible={isSearchVisible} toggleSearch={toggleSearch} />
-        )}
-        {/* <div 
-        className= "bg-gray-100 py-4 ">
-          <div className='flex items-center justify-center gap-3'>
-            <input type="search " className='bg-white rounded-xl p-1 w-1/3' />
-            <img src="/src/assets/cross_icon.png" alt="" className='h-4' />
-          </div>
-        </div> */}
         <hr className="w-full text-gray-300 "/>
-        
-
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/Collection' element={<Collection/>}/>
           <Route path='/About' element={<About/>} />
           <Route path='/Contact' element={<Contact/>} />
-          <Route path='/Product/ProductID' element={<Product/>} />
+          <Route path='/Product/:productId' element={<Product/>} />
           <Route path='/Cart' element={<Cart/>} />
           <Route path='/Login' element={<Login/>} />
           <Route path='/PlaceOrder' element={<PlaceOrder/>} />

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, } from "react-router-dom";
 import SearchBox from "./SearchBox";
+import { useShop } from "../context/ShopContext";
 
-const Navbar = ({toggleSearch}) => {
+const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   
+  const {setShowSearch,getCartCount} = useShop()
 
   return (
     <div className="">
@@ -48,7 +50,7 @@ const Navbar = ({toggleSearch}) => {
 
         <div className="flex items-center gap-4">
           <img
-            onClick={toggleSearch}
+            onClick={()=>setShowSearch(true)}
             src="/src/assets/frontend_assets/search_icon.png"
             alt=""
             className="h-5 cursor-pointer"
@@ -74,8 +76,8 @@ const Navbar = ({toggleSearch}) => {
               alt=""
               className="w-5 min-w-5"
             />
-            <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[-8px]">
-              1
+            <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
+              {getCartCount()}
             </p>
           </Link>
           <img

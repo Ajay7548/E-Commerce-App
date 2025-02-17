@@ -1,6 +1,8 @@
-import { createContext, useContext, useState } from "react";
-import { products as initialProducts } from "../assets/frontend_assets/assets"; 
-import { currency,delivery_fee } from "./index";
+import { createContext, useContext, useEffect, useState } from "react";
+import { products as initialProducts } from "../assets/frontend_assets/assets";
+import { currency, delivery_fee } from "./index";
+import { toast } from "react-toastify";
+
 
 // Create the ShopContext with a default value of null
 export const ShopContext = createContext(null);
@@ -12,26 +14,77 @@ export const useShop = () => {
 };
 
 // The main provider component that wraps the app and provides context data
-export const ShopProvider = ({ children }) => {  
+export const ShopProvider = ({ children }) => {
     // Initialize the products state with the imported product list
     const [products, setProducts] = useState(initialProducts);
+    const [search, setSearch] = useState('')
+    const [showSearch, setShowSearch] = useState(false)
+    const [cartItems, setCartItems] = useState([])
 
-   
+    const addToCart = async (itemID, size) => {
+        let cardData = structuredClone(cartItems)
 
-    // Create an object with all the values to be shared in the context
-    const value = { 
-        products,      // List of available products
-        setProducts,   // Function to update the products list
-        currency,      // Currency symbol
-        delivery_fee   // Delivery fee amount
-    };
+        //Providing alert if size not selected
+        if (!size) {
+            toast.error('Select Product Size')
+            return
+        }
 
-    // Return the provider component, passing the value to all children
-    return (
-        <ShopContext.Provider value={value}>
-            {children} 
-            {/* "children" represents all components wrapped inside <ShopProvider> */}
-        </ShopContext.Provider>
-    );
+        if (cardData[itemID]) {
+            if (cardData[itemID][size]) {
+                cardData[itemID][size] += 1
+            }
+            else {
+                cardData[itemID][size] = 1
+            }
+        } else {
+            cardData[itemID] = {}
+            cardData[itemID][size] = 1
+        }
+        setCartItems(cardData)//for saving cardData
+    }
+
+    const getCartCount = () => {
+        let totalCount = 0
+        for (const items in cartItems) {
+            for (const item in cartItems[items]) {
+                try {
+                    if (cartItems[items][item] > 0) totalCount += cartItems[items][item]
+
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        }
+        return totalCount
+    }
+
+    const updateQuantity = async (itemID,size,quantity) =>{
+
+        let cardData = structuredClone(cartItems)
+
+        cardData[itemID][size] = quantity
+
+        setCartItems(cardData)
+    }
+
+
+// Create an object with all the values to be shared in the context
+const value = {
+    products,      // List of available products
+    setProducts,   // Function to update the products list
+    currency,      // Currency symbol
+    delivery_fee,  // Delivery fee amount
+    search, setSearch, showSearch, setShowSearch, cartItems, addToCart,
+    getCartCount,updateQuantity
+};
+
+// Return the provider component, passing the value to all children
+return (
+    <ShopContext.Provider value={value}>
+        {children}
+        {/* "children" represents all components wrapped inside <ShopProvider> */}
+    </ShopContext.Provider>
+);
 };
 
