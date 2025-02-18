@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
+import { useNavigate } from "react-router-dom";
 import { useShop } from "../context/ShopContext";
+import CartTotal from "../components/CartTotal"; // Import the new component
 
 const Cart = () => {
-  const { products, currency, cartItems, updateQuantity } = useShop();
+  const { products, currency, cartItems, updateQuantity,navigate } = useShop();
   const [cartData, setCartData] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
-  const shippingFee = 5; // Example flat shipping fee
 
   useEffect(() => {
     let tempData = [];
@@ -38,7 +39,7 @@ const Cart = () => {
   return (
     <div className="pt-14 flex flex-col lg:flex-row justify-between items-center gap-8">
       {/* Left: Cart Items */}
-      <div className="w-full lg:w-[60%]">
+      <div className="w-full  ">
         <div className="text-2xl my-4">
           <Title text1={"YOUR"} text2={"CART"} />
         </div>
@@ -101,32 +102,11 @@ const Cart = () => {
         </div>
       </div>
 
-      {/* Right: Cart Totals */}
-      <div className="mt-18 w-full lg:w-[40%] bg-gray-100 p-6 rounded-md shadow-md">
-        <div className="text-2xl text-center my-6">
-          <Title text1={"CART"} text2={"TOTALS"} />
-        </div>
-        <div className="flex flex-col">
-          <div className="flex justify-between px-2 py-2 border-b border-gray-400">
-            <p className="text-sm">SubTotal</p>
-            <p>
-              {currency} {subtotal.toFixed(2)}
-            </p>
+      {/* Right: Cart Totals (Using the new component) */}
+          <div className="w-1/2">
+          <CartTotal subtotal={subtotal} currency={currency} navigate={navigate} />
+
           </div>
-          <div className="flex justify-between px-2 py-2 border-b border-gray-400">
-            <p className="text-sm">Shipping Fee</p>
-            <p>
-              {currency} {subtotal > 0 ? shippingFee.toFixed(2) : "0.00"}
-            </p>
-          </div>
-          <div className="flex justify-between px-2 py-2 border-b border-gray-400">
-            <p className="text-sm font-semibold">Total</p>
-            <p>
-              {currency} {(subtotal > 0 ? subtotal + shippingFee : 0).toFixed(2)}
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

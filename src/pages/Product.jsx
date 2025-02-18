@@ -24,8 +24,6 @@ const Product = () => {
     }
   }, [productId, products]);
 
-  
-
   return productData ? (
     <div>
       <div className=" pt-10 transition-opacity ease-in duration-500 opacity-100">

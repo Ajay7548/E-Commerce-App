@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { products as initialProducts } from "../assets/frontend_assets/assets";
 import { currency, delivery_fee } from "./index";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 // Create the ShopContext with a default value of null
@@ -20,6 +21,7 @@ export const ShopProvider = ({ children }) => {
     const [search, setSearch] = useState('')
     const [showSearch, setShowSearch] = useState(false)
     const [cartItems, setCartItems] = useState([])
+    const navigate = useNavigate()
 
     const addToCart = async (itemID, size) => {
         let cardData = structuredClone(cartItems)
@@ -76,7 +78,7 @@ const value = {
     currency,      // Currency symbol
     delivery_fee,  // Delivery fee amount
     search, setSearch, showSearch, setShowSearch, cartItems, addToCart,
-    getCartCount,updateQuantity
+    getCartCount,updateQuantity,navigate
 };
 
 // Return the provider component, passing the value to all children

@@ -7,7 +7,11 @@ const RelatedProduct = ({category,subCategory}) => {
     const {products} = useShop()
     const [relatedProduct,setRelatedProduct] = useState([])
 
+    
+
     useEffect(()=>{
+
+
 
         if(products.length > 0){
             let productData = [...products]
@@ -18,7 +22,7 @@ const RelatedProduct = ({category,subCategory}) => {
             setRelatedProduct(productData.slice(0,5))
             // console.log((productData.slice(0,3)));
         }
-    },[products])
+    },[products,category,subCategory])
 
   return (
     <div className='my-3'>
@@ -27,14 +31,15 @@ const RelatedProduct = ({category,subCategory}) => {
             <Title text1={'RELATED'} text2={'PRODUCTS'} />
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {relatedProduct.map((item, index) => {
+          {relatedProduct.map((item) => {
             return (
               <ProductItems
-                key={index}
+                key={item._id}
                 id={item._id}
                 image={item.image}
                 name={item.name}
                 price={item.price}
+                // onClick={handleClick}
               />
             );
           })}
