@@ -21,7 +21,23 @@ export const ShopProvider = ({ children }) => {
     const [search, setSearch] = useState('')
     const [showSearch, setShowSearch] = useState(false)
     const [cartItems, setCartItems] = useState([])
+    const [subtotal, setSubtotal] = useState(0);
+    // let total =0
+
     const navigate = useNavigate()
+
+    useEffect(() => {
+        let total = 0;
+        for (const itemID in cartItems) {
+            for (const size in cartItems[itemID]) {
+                const product = products.find((p) => p._id === itemID);
+                if (product) {
+                    total += product.price * cartItems[itemID][size];
+                }
+            }
+        }
+        setSubtotal(total); // ✅ Update subtotal
+    }, [cartItems, products]);
 
     const addToCart = async (itemID, size) => {
         let cardData = structuredClone(cartItems)
@@ -78,7 +94,7 @@ const value = {
     currency,      // Currency symbol
     delivery_fee,  // Delivery fee amount
     search, setSearch, showSearch, setShowSearch, cartItems, addToCart,
-    getCartCount,updateQuantity,navigate
+    getCartCount,updateQuantity,navigate,subtotal,
 };
 
 // Return the provider component, passing the value to all children

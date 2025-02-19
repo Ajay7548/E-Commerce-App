@@ -4,7 +4,9 @@ import Title from '../components/Title'
 
 const Order = () => {
   const {products,currency} = useShop()
-  
+
+  const date = new Date(Date.now()).toLocaleDateString()
+  // const formatDate = date.toLocaleDateString('en-GB')
 
   return (
     <div className='pt-16'>
@@ -25,7 +27,7 @@ const Order = () => {
                     <p>Quantity: 1</p>
                     <p>Size: M</p>
                     </div>
-                  <p className='mt-2'>Date: <span className='text-gray-400'>25, Jul, 2024</span></p>
+                  <p className='mt-2'>Date: <span className='text-gray-700'>{date}</span></p>
                   </div>
                 </div>
                 <div className='md:w-1/2 flex justify-between'>

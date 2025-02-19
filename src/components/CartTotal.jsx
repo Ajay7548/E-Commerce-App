@@ -1,8 +1,12 @@
 import React from "react";
 import Title from "./Title";
+import { useEffect } from "react";
 
-const CartTotal = ({ subtotal=0, currency,getCartCount,navigate, showButton= true }) => {
+const CartTotal = ({subtotal=0, currency,navigate, showButton= true }) => {
   const shippingFee = 5; // Example flat shipping fee
+  useEffect(()=>{
+    console.log("Subtotal Passed to CartTotal:", subtotal);
+  },[subtotal])
 
   return (
     <div className="mt-10   mx-auto bg-gray-100 p-6 rounded-md shadow-md">

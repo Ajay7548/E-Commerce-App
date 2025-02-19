@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import Title from '../components/Title';
 import CartTotal from '../components/CartTotal';
 import { useNavigate } from 'react-router-dom';
+import { useShop } from '../context/ShopContext';
 
-const PlaceOrder = ({ subtotal, currency}) => {
+
+const PlaceOrder = () => {
+  const { currency } = useShop();
   const navigate = useNavigate()
-
+  const [subtotal, setSubtotal] = useState(0);
   const [method, setMethod] = useState('cod');
 
   return (
@@ -43,8 +46,9 @@ const PlaceOrder = ({ subtotal, currency}) => {
       {/* right side  */}
       <div className='flex flex-col'>
       <div className=''>
-        <CartTotal subtotal={subtotal} currency={currency} showButton={false} />
+      <CartTotal subtotal={subtotal} currency={currency} navigate={navigate} showButton={false} />
       </div>
+      {/* Payment mode  */}
       <div className='mt-12 '>
         <Title text1={'PAYMENT'} text2={'METHOD'} />
 

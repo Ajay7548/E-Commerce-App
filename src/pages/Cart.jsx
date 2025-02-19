@@ -105,7 +105,6 @@ const Cart = () => {
       {/* Right: Cart Totals (Using the new component) */}
           <div className="w-1/2">
           <CartTotal subtotal={subtotal} currency={currency} navigate={navigate} />
-
           </div>
     </div>
   );
