@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink, Link, useLocation, } from "react-router-dom";
 import SearchBox from "./SearchBox";
 import { useShop } from "../context/ShopContext";
+import logo_whiteedit from '../assets/logo_whiteedit.png'
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,12 +12,13 @@ const Navbar = () => {
   return (
     <div className="">
       <nav className=" flex items-center justify-between py-5 font-medium ">
-        <Link to={"/"}>
+        <Link to={"/"} className="flex items-center gap-1 ">
           <img
-            src="/src/assets/frontend_assets/logo.png"
+            src={logo_whiteedit}
             alt=""
-            className="w-36"
+            className="h-12"
           />
+          <p className="text-xl pt-2 font-medium logo">TRENDHIVE</p>
         </Link>
 
         <ul className="hidden sm:flex gap-5 text-md text-gray-700">

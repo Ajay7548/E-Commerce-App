@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo_whiteedit from '../assets/logo_whiteedit.png'
+
 
 const Footer = () => {
   // const [isActive,setIsActive]= useState(false)
@@ -10,13 +12,14 @@ const Footer = () => {
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
 
         <div>
-          <Link to={"/"}>
-            <img
-              src="/src/assets/frontend_assets/logo.png"
-              alt=""
-              className="w-32 py-5"
-            />
-          </Link>
+          <Link to={"/"} className="flex items-center gap-1 pb-6 ">
+                    <img
+                      src={logo_whiteedit}
+                      alt=""
+                      className="h-12"
+                    />
+                    <p className="text-xl pt-2 font-medium logo">TRENDHIVE</p>
+                  </Link>
           <p className=" text-gray-600 text-sm md:w-[65%]">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
             magni ut nemo sapiente doloribus incidunt fugiat dolor iste odit
