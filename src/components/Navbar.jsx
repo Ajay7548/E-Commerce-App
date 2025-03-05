@@ -3,6 +3,11 @@ import { NavLink, Link, useLocation, } from "react-router-dom";
 import SearchBox from "./SearchBox";
 import { useShop } from "../context/ShopContext";
 import logo_whiteedit from '../assets/logo_whiteedit.png'
+import search_icon from '../assets/search_icon.png'
+import profile_icon from '../assets/profile_icon.png'
+import cart_icon from '../assets/cart_icon.png'
+import menu_icon from '../assets/menu_icon.png'
+import dropdown_icon from '../assets/dropdown_icon.png'
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -53,14 +58,14 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <img
             onClick={()=>setShowSearch(true)}
-            src="/src/assets/frontend_assets/search_icon.png"
+            src={search_icon}
             alt=""
             className="h-5 cursor-pointer"
           />
           <div className="group relative">
             <Link to={'/Login'}>
             <img
-              src="/src/assets/frontend_assets/profile_icon.png"
+              src={profile_icon}
               alt=""
               className="h-5 cursor-pointer"
             />
@@ -76,7 +81,7 @@ const Navbar = () => {
 
           <Link to="/Cart" className="relative">
             <img
-              src="/src/assets/frontend_assets/cart_icon.png"
+              src={cart_icon}
               alt=""
               className="w-5 min-w-5"
             />
@@ -86,7 +91,7 @@ const Navbar = () => {
           </Link>
           <img
             onClick={() => setIsVisible(true)}
-            src="/src/assets/menu_icon.png"
+            src={menu_icon}
             alt=""
             className="w-5 sm:hidden cursor-pointer"
           />
@@ -104,7 +109,7 @@ const Navbar = () => {
                 className="flex items-center gap-4 p-6"
               >
                 <img
-                  src="/src/assets/dropdown_icon.png"
+                  src={dropdown_icon}
                   alt=""
                   className="h-4 rotate-180 cursor-pointer"
                 />
@@ -143,28 +148,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      {/* <div className={`${isSearchVisible ? "flex" : "hidden"} bg-gray-50 px-10 justify-center items-center py-6`}>
-        <div className="flex items-center md:w-1/2 gap-4">
-          <div className="m-auto border flex w-full items-center border-gray-400 rounded-3xl">
-            <input
-              type="search"
-              placeholder="Search"
-              className="text-gray-400 w-full h-10 px-5 py-1 focus:outline-none focus:ring-0 focus:border-transparent"
-            />
-            <img 
-              className="h-4 px-6"
-              src="/src/assets/frontend_assets/search_icon.png"
-              alt=""
-            />
-          </div>
-          <img 
-            className="h-4 cursor-pointer"
-            src="/src/assets/frontend_assets/cross_icon.png"
-            alt=""
-            onClick={() => setIsSearchVisible(false)}
-          />   
-        </div>
-      </div> */}
     </div>
   );
 };
