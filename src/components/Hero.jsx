@@ -1,5 +1,5 @@
 import React from "react";
-import hero_img from '../assets/hero_img.png'
+import hero_Img from '../assets/hero_img.png'
 
 const Hero = () => {
     return (
@@ -25,7 +25,7 @@ const Hero = () => {
             </div>
 
             {/* hero roghtside section  */}
-            <img src={hero_img} alt="" className="w-full sm:w-1/2" />
+            <img src={hero_Img} alt="no-image" className="w-full sm:w-1/2" />
         </div>
     );
 };

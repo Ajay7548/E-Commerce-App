@@ -1,5 +1,5 @@
 import React from "react";
-import exchange_icon from '../assets/excahnge_icon.png'
+import exchange_icon from '../assets/exchange_icon.png'
 import quality_icon from '../assets/quality_icon.png'
 import support_img from '../assets/support_img.png'
 
