@@ -1,4 +1,8 @@
 import React from "react";
+import exchange_icon from '../assets/excahnge_icon.png'
+import quality_icon from '../assets/quality_icon.png'
+import support_img from '../assets/support_img.png'
+
 
 const OurPolicy = () => {
   return (
@@ -7,7 +11,7 @@ const OurPolicy = () => {
       <div className=" md:flex  my-10  w-full justify-around ">
         <div className="flex flex-col items-center  ">
           <img
-            src="/src/assets/frontend_assets/exchange_icon.png"
+            src={exchange_icon}
             alt=""
             className="w-12  py-5"
           />
@@ -18,7 +22,7 @@ const OurPolicy = () => {
         </div>
         <div className="flex flex-col items-center  ">
           <img
-            src="/src/assets/frontend_assets/quality_icon.png"
+            src={quality_icon}
             alt=""
             className="w-12  py-5"
           />
@@ -29,7 +33,7 @@ const OurPolicy = () => {
         </div>
         <div className="flex flex-col items-center  ">
           <img
-            src="/src/assets/frontend_assets/support_img.png"
+            src={support_img}
             alt=""
             className="w-10  py-6"
           />

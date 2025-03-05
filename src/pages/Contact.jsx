@@ -1,6 +1,7 @@
 import React from 'react'
 import Subscribe from '../components/Subscribe'
 import Title from '../components/Title'
+import contact_img from '../assets/contact_img.png'
 
 const Contact = () => {
   return (
@@ -12,7 +13,7 @@ const Contact = () => {
 
       <div className='mt-8 grid md:grid-cols-2 gap-10 py-10  '>
         <div>
-          <img src="/src/assets/frontend_assets/contact_img.png" alt="" />
+          <img src={contact_img} alt="" />
         </div>
 
         <div className=''>

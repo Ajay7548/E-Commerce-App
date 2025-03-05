@@ -2,6 +2,7 @@ import React from "react";
 import Title from "../components/Title";
 import OurPolicy from "../components/OurPolicy";
 import Subscribe from "../components/Subscribe";
+import about_img from '../assets/about_img.png'
 
 const About = () => {
   return (
@@ -14,7 +15,7 @@ const About = () => {
       <div className="grid md:grid-cols-2 gap-14 ">
         <div className="">
         <img
-          src="/src/assets/frontend_assets/about_img.png"
+          src={about_img}
           alt=""
           className=""
           // error
