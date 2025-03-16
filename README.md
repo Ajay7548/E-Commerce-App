@@ -43,8 +43,8 @@ npm run dev
 4. Track your orders from the dashboard.
 
 ## 📸 Screenshots
-<img width="943" alt="product" src="https://github.com/user-attachments/assets/6e323d91-c2e6-4311-a4c1-ad568992440a" />
-<img width="814" alt="product" src="https://github.com/user-attachments/assets/2828442a-9b78-4957-bfef-6d289c0f2e59" />
+<img width="814" alt="product" src="https://github.com/user-attachments/assets/59522a25-cf2f-45fc-ab49-68174fea76eb" />
+<img width="816" alt="items" src="https://github.com/user-attachments/assets/a391a995-b73c-4df0-b278-a671dbd44c86" />
 
 ## 🚀 Deployment
 ```sh
