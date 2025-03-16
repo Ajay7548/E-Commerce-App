@@ -44,7 +44,7 @@ npm run dev
 
 ## 📸 Screenshots
 <img width="943" alt="product" src="https://github.com/user-attachments/assets/6e323d91-c2e6-4311-a4c1-ad568992440a" />
-<img width="816" alt="items" src="https://github.com/user-attachments/assets/70ca2e82-678e-4ace-9a07-036dec9127d9" />
+<img width="814" alt="product" src="https://github.com/user-attachments/assets/2828442a-9b78-4957-bfef-6d289c0f2e59" />
 
 ## 🚀 Deployment
 ```sh
