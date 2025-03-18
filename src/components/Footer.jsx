@@ -1,63 +1,73 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import logo_whiteedit from '../assets/logo_whiteedit.png'
-
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import logo_whiteedit from '../assets/logo_whiteedit.png';
 
 const Footer = () => {
-  // const [isActive,setIsActive]= useState(false)
   return (
-    <div className="">
-
-      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-10"> */}
-      <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
-
-        <div>
-          <Link to={"/"} className="flex items-center gap-1 pb-6 ">
-                    <img
-                      src={logo_whiteedit}
-                      alt=""
-                      className="h-12"
-                    />
-                    <p className="text-xl pt-2 font-medium logo">TRENDHIVE</p>
-                  </Link>
-          <p className=" text-gray-600 text-sm md:w-[65%]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-            magni ut nemo sapiente doloribus incidunt fugiat dolor iste odit
-            necessitatibus assumenda, sed fugit, omnis ratione similique commodi
-            quod est laborum.
-          </p>
-        </div>
-
-        <div>
-          <p className="text-black font-semibold  text-xl py-5">COMPANY</p>
-          <ul className="text-gray-600  text-sm flex flex-col gap-1 ">
-            <Link to={"/"}>
-              <li>Home</li>
+    <div className=" pt-16 pb-6">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-[3fr_1fr_1fr] gap-12 text-sm">
+          
+          {/* Logo & About Section */}
+          <div>
+            <Link to="/" className="flex items-center gap-2 pb-4">
+              <img src={logo_whiteedit} alt="TrendHive Logo" className="h-12" />
+              <p className="text-2xl font-bold text-gray-800">TRENDHIVE</p>
             </Link>
-            <Link to={"/About"}>
-              <li>About us</li>
-            </Link>
-            <Link>
-              <li>Delivery</li>
-            </Link>
-            <Link to={"/About"}>
-              <li>Privacy policy</li>
-            </Link>
-          </ul>
-        </div>
+            <p className="text-gray-600 leading-relaxed max-w-md">
+              Your one-stop destination for the latest fashion trends. Quality, style, and convenience at your fingertips.
+            </p>
 
-        <div>
-          <p className="text-black font-semibold  text-xl py-5">GET IN TOUCH</p>
-          <p className="text-gray-600 text-sm">+91-XXX XXX XXXX </p>
-          <span className="text-gray-600 text-sm">ajaymourya@gmail.com</span>
+            {/* Social Media Icons */}
+            <div className="flex gap-4 mt-4">
+              <a href="#" className="text-gray-600 hover:text-gray-900 transition">
+                <FaFacebookF size={20} />
+              </a>
+              <a href="#" className="text-gray-600 hover:text-gray-900 transition">
+                <FaInstagram size={20} />
+              </a>
+              <a href="#" className="text-gray-600 hover:text-gray-900 transition">
+                <FaTwitter size={20} />
+              </a>
+              <a href="#" className="text-gray-600 hover:text-gray-900 transition">
+                <FaLinkedinIn size={20} />
+              </a>
+            </div>
+          </div>
+
+          {/* Company Links */}
+          <div>
+            <p className="text-gray-900 font-semibold text-lg mb-4">COMPANY</p>
+            <ul className="text-gray-600 space-y-2">
+              <li>
+                <Link to="/" className="hover:text-gray-900 transition">Home</Link>
+              </li>
+              <li>
+                <Link to="/About" className="hover:text-gray-900 transition">About Us</Link>
+              </li>
+              <li>
+                <Link to="#" className="hover:text-gray-900 transition">Delivery</Link>
+              </li>
+              <li>
+                <Link to="/About" className="hover:text-gray-900 transition">Privacy Policy</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <p className="text-gray-900 font-semibold text-lg mb-4">GET IN TOUCH</p>
+            <p className="text-gray-700">📞 +91-XXX XXX XXXX</p>
+            <p className="text-gray-700">📧 ajaymourya@gmail.com</p>
+          </div>
         </div>
       </div>
 
-
-      <div className="text-center mt-10">
-        <hr className="text-gray-400 w-full py-1" />
-        <p className="m-auto text-gray-800 py-3">
-          Copyright 2024@ Ajay Mourya - All Right Reserved.
+      {/* Footer Bottom */}
+      <div className="text-center mt-10 border-t border-gray-300 pt-4">
+        <p className="text-gray-600 text-sm">
+          &copy; 2024 Ajay Mourya - All Rights Reserved.
         </p>
       </div>
     </div>

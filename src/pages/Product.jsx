@@ -1,134 +1,173 @@
+
+
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useShop } from "../context/ShopContext";
 import { assets } from "../assets/frontend_assets/assets";
 import { currency } from "../context";
 import RelatedProduct from "../components/RelatedProduct";
+import { motion } from "framer-motion";
 
 const Product = () => {
   const { productId } = useParams();
-  // console.log(productId);
-  const { products,addToCart } = useShop();
-  const [productData, setProductData] = useState(false);
+  const { products, addToCart } = useShop();
+  const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
   const [size, setSize] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  
-  // const fetchProductData = () => {
-   
   useEffect(() => {
     const foundProduct = products.find((item) => item._id === productId);
     if (foundProduct) {
       setProductData(foundProduct);
-      setImage(foundProduct.image[0]); // Set the first image of the product
+      setImage(foundProduct.image[0]); // Set default image
     }
+    setLoading(false);
   }, [productId, products]);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
   return productData ? (
-    <div>
-      <div className=" pt-10 transition-opacity ease-in duration-500 opacity-100">
-        {/* ProductData  */}
-        <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
-          {/* Prodcut Image  */}
-          <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row  ">
-            <div className="flex sm:flex-col overflow-x-auto  justify-between sm:justify-normal sm:w-[18%] w-full">
-              {productData.image.map((item, index) => (
-                <img
-                  onClick={() => setImage(item)}
-                  src={item}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="container mx-auto px-4 pt-10"
+    >
+      <div className="flex flex-col sm:flex-row gap-12">
+        {/* Product Image Section */}
+        <motion.div
+          className="flex-1 flex flex-col gap-4 items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          {/* Larger Main Image */}
+          <motion.img
+            src={image}
+            alt={productData.name}
+            className="w-full sm:w-[500px] h-auto rounded-lg shadow-lg transition-all hover:scale-105 duration-300"
+            key={image}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          />
+
+          {/* Small Image Thumbnails Below */}
+          <div className="flex gap-2 mt-4">
+            {productData.image.map((item, index) => (
+              <motion.img
+                key={index}
+                src={item}
+                className={`w-20 h-20 object-cover cursor-pointer rounded-md transition-all ${
+                  item === image
+                    ? "border-2 border-blue-500 ring-2 ring-blue-500 shadow-md"
+                    : "border border-gray-300 hover:border-gray-400"
+                }`}
+                onClick={() => setImage(item)}
+                whileHover={{ scale: 1.1 }}
+              />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Product Details */}
+        <motion.div
+          className="flex-1 space-y-4 bg-white bg-opacity-80 p-6 rounded-lg shadow-lg backdrop-blur-lg"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <h1 className="text-4xl font-bold text-gray-800">{productData.name}</h1>
+          <div className="flex items-center gap-1">
+            {[...Array(4)].map((_, i) => (
+              <img key={i} src={assets.star_icon} alt="Star" className="w-5" />
+            ))}
+            <img src={assets.star_dull_icon} alt="Star" className="w-5 opacity-50" />
+            <p className="text-sm pl-2 text-gray-600">(122 reviews)</p>
+          </div>
+          <p className="text-3xl font-extrabold text-blue-600">{currency}{productData.price}</p>
+          <p className="text-gray-600 text-lg leading-relaxed">{productData.description}</p>
+
+          <div className="mt-5">
+            <p className="text-lg font-medium">Select Size:</p>
+            <div className="flex gap-2 mt-2">
+              {productData.sizes.map((item, index) => (
+                <button
                   key={index}
-                  className={`w-[24%] sm:mb-3 sm:w-full flex-shrink-0 cursor-pointer`}
-                />
+                  onClick={() => setSize(item)}
+                  className={`border px-5 py-2 text-lg font-medium rounded-lg transition-all ${
+                    item === size
+                      ? "border-blue-500 bg-blue-100 text-blue-700 shadow-md"
+                      : "border-gray-300 bg-gray-100 hover:bg-gray-200"
+                  }`}
+                >
+                  {item}
+                </button>
               ))}
             </div>
-            <div className="w-full sm:w-[80%]">
-              <img className="w-ful h-auto" src={image} alt="" />
-            </div>
           </div>
-          <div className="flex-1">
-            <h1 className="font-medium text-2xl mt-2">{productData.name}</h1>
-            <div className="flex items-center gap-1 mt-2">
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_dull_icon} alt="" className="w-3 5" />
-              <p className="pl-2">(122)</p>
-            </div>
-            <p className="mt-5 text-3xl font-medium">
-              {currency}
-              {productData.price}
-            </p>
-            <p className="mt-5 text-gray-500 md:w-4/5">
-              {productData.description}
-            </p>
-            <div className="flex flex-col gap-4 my-8">
-              <p>Select Size:</p>
-              <div className="flex gap-2">
-                {productData.sizes.map((item, index) => (
-                  <button
-                    onClick={() => setSize(item)}
-                    className={`border border-gray-300 py-2 px-4 bg-gray-100 cursor-pointer ${
-                      item === size ? "border-orange-500" : ""
-                    }`}
-                    key={index}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <button 
-            onClick={()=>addToCart(productData._id,size)}
-            className=" active:bg-gray-700 mt-3 text-sm w-fit border px-8 py-3 bg-black text-white cursor-pointer transition ease-in-out">
-              ADD TO CART
-            </button>
 
-            <div className="flex flex-col">
-              <hr className="w-full my-4 text-gray-300" />
-              <p className="text-gray-500 text-sm">100% Original product.</p>
-              <p className="text-gray-500 text-sm">
-                Cash on delivery is available on this product.
-              </p>
-              <p className="text-gray-500 text-sm">
-                Easy return and exchange policy within 7 days.
-              </p>
-            </div>
+          <motion.button
+            onClick={() => addToCart(productData._id, size)}
+            className="w-1/2 px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-black to-gray-900 hover:from-gray-900 hover:to-black transition-all rounded-lg shadow-lg"
+            whileTap={{ scale: 0.95 }}
+          >
+            ADD TO CART
+          </motion.button>
+
+          <div className="text-gray-600 text-sm mt-4 space-y-2">
+            <hr className="my-4 border-gray-300" />
+            <p>✅ 100% Original product</p>
+            <p>🚚 Cash on delivery available</p>
+            <p>🔄 7-day easy return & exchange</p>
           </div>
-        </div>
+        </motion.div>
+      </div>
 
-        <div className="flex pt-20 ">
-          <p className="border border-gray-200 px-4 py-2 text-sm font-semibold">
+      {/* Description & Review Section */}
+      <motion.div
+        className="mt-10 border-t pt-6 bg-white p-6 rounded-lg shadow-lg"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        <div className="flex space-x-4 text-lg font-semibold">
+          <p className="border-b-4 border-blue-500 pb-2 text-blue-600 cursor-pointer">
             Description
           </p>
-          <p className="border border-gray-200 px-4 py-2 text-sm">
-            Review(122)
+          <p className="text-gray-600 cursor-pointer hover:text-gray-800 transition">
+            Review (122)
           </p>
         </div>
-        <div className="flex flex-col gap-1 border border-gray-200">
-          <p className=" text-gray-500 px-6 py-4  text-sm">
-            An e-commerce website is an online platform that facilitates the
-            buying and selling of products or services over the internet. It
-            serves as a virtual marketplace where businesses and individuals can
-            showcase their products, interact with customers, and conduct
-            transactions without the need for a physical presence. E-commerce
-            websites have gained immense popularity due to their convenience,
-            accessibility, and the global reach they offer.
-          </p>
-          <p className=" text-gray-500 px-6 py-4 text-sm">
-            E-commerce websites typically display products or services along
-            with detailed descriptions, images, prices, and any available
-            variations (e.g., sizes, colors). Each product usually has its own
-            dedicated page with relevant information.
-          </p>
-        </div>
-      </div>
-      <RelatedProduct category={productData.category} subCategory={productData.subCategory}/>
+        <p className="text-gray-700 mt-4 leading-relaxed">
+          E-commerce websites facilitate online buying and selling, offering convenience, accessibility, and a global marketplace.
+        </p>
+        <p className="text-gray-700 mt-2 leading-relaxed">
+          These platforms showcase products with detailed descriptions, images, prices, and customer reviews, enhancing user experience.
+        </p>
+      </motion.div>
 
-    </div>
+      {/* Related Products */}
+      <motion.div
+        className="mt-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7 }}
+      >
+        <RelatedProduct category={productData.category} subCategory={productData.subCategory} />
+      </motion.div>
+    </motion.div>
   ) : (
-    <div className="opacity-0"></div>
+        <div className="opacity-0"></div>
   );
 };
 
 export default Product;
+

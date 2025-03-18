@@ -31,21 +31,22 @@ const  App = () => {
       <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
         <ToastContainer />
         <Navbar />
-        <SearchBox/>
+        {/* <SearchBox/> */}
         
         <hr className="w-full text-gray-300 "/>
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/Collection' element={<Collection/>}/>
-          <Route path='/About' element={<About/>} />
-          <Route path='/Contact' element={<Contact/>} />
-          <Route path='/Product/:productId' element={<Product/>} />
-          <Route path='/Cart' element={<Cart/>} />
-          <Route path='/Login' element={<Login/>} />
-          <Route path='/PlaceOrder' element={<PlaceOrder/>} />
-          <Route path='/Order' element={<Order/>} />
+  <Route path="/" element={<Home />} /> {/* Add this line */}
+  <Route path="/Home" element={<Home />} />
+  <Route path="/Collections" element={<Collection />} />
+  <Route path="/About" element={<About />} />
+  <Route path="/Contact" element={<Contact />} />
+  <Route path="/Product/:productId" element={<Product />} />
+  <Route path="/Cart" element={<Cart />} />
+  <Route path="/Login" element={<Login />} />
+  <Route path="/PlaceOrder" element={<PlaceOrder />} />
+  <Route path="/Order" element={<Order />} />
+</Routes>
 
-        </Routes>
 
         <Footer/>
       </div>

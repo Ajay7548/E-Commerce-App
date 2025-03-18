@@ -3,237 +3,171 @@ import Title from "../components/Title";
 import { useShop } from "../context/ShopContext";
 import ProductItems from "../components/ProductItems";
 import { useNavigate } from "react-router-dom";
+import { FaFilter } from "react-icons/fa"; // Filter Icon
+import SearchBox from "../components/SearchBox";
 
 const Collection = () => {
-  const { products,search,showSearch } = useShop();
-  const [ProductCollection, setProductCollection] = useState([]);
-  const [showFilter, setShowFilter] = useState(false); // Boolean state for filter visibility
+  const { products, search, showSearch } = useShop();
+  const [productCollection, setProductCollection] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
-  const [sortType,setSortType] = useState('relevant')
+  const [sortType, setSortType] = useState("relevant");
+  const navigate = useNavigate();
 
+  // Toggle Category Selection
   const toggleCategory = (event) => {
-    const value = event.target.value; // No destructuring
+    const value = event.target.value;
     setCategory((prev) =>
-      prev.includes(value)
-        ? prev.filter((item) => item !== value)
-        : [...prev, value]
+      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
     );
   };
+
+  // Toggle Subcategory Selection
   const toggleSubCategory = (event) => {
-    const value = event.target.value; // No destructuring
+    const value = event.target.value;
     setSubCategory((prev) =>
-      prev.includes(value)
-        ? prev.filter((item) => item !== value)
-        : [...prev, value]
+      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
     );
   };
 
+  // Apply Filters
   const applyFilter = () => {
-    // 1️⃣ Create a copy of the original products array
-    // This ensures we do not modify the original product list.
-    let filteredProduct = [...products];
+    let filteredProducts = [...products];
 
-    //for searching the content from serachbox
-    if(showSearch && search){
-      filteredProduct=filteredProduct.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    // Search Filter
+    if (showSearch && search) {
+      filteredProducts = filteredProducts.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
     }
-  
-    // 2️⃣ Filter by selected category (if any)
+
+    // Category Filter
     if (category.length > 0) {
-      filteredProduct = filteredProduct.filter((item) => 
-        category.includes(item.category) // Keep only items where category matches selected categories
-      );
+      filteredProducts = filteredProducts.filter((item) => category.includes(item.category));
     }
-  
-    // 3️⃣ Filter by selected subcategory (if any)
+
+    // Subcategory Filter
     if (subCategory.length > 0) {
-      filteredProduct = filteredProduct.filter((item) => 
-        subCategory.includes(item.subCategory) // Keep only items where subcategory matches selected subcategories
-      );
+      filteredProducts = filteredProducts.filter((item) => subCategory.includes(item.subCategory));
     }
-  
-    // 4️⃣ Update state with filtered products
-    // This will re-render the component to show only the filtered products.
-    setProductCollection(filteredProduct);
+
+    setProductCollection(filteredProducts);
   };
 
-  const sortPrice = () =>{
-    let sortProduct = [...ProductCollection]
+  // Sort Products by Price
+  const sortPrice = () => {
+    let sortedProducts = [...productCollection];
 
     switch (sortType) {
-      case 'lowToHigh':
-        setProductCollection(sortProduct.sort((a,b)=>a.price-b.price))
+      case "lowToHigh":
+        sortedProducts.sort((a, b) => a.price - b.price);
         break;
-    
-      case 'highToLow':
-        setProductCollection(sortProduct.sort((a,b)=>b.price-a.price))
+      case "highToLow":
+        sortedProducts.sort((a, b) => b.price - a.price);
         break;
-
       default:
-        applyFilter()
-        break;
+        applyFilter();
+        return;
     }
 
-  }
-
-  const navigate = useNavigate();
-  const handleClick = (_id) => {
-    navigate(`/Product/${_id}`);
+    setProductCollection(sortedProducts);
   };
-  
-  
+
+  // Navigate to Product Page
+  const handleClick = (id) => {
+    navigate(`/Product/${id}`);
+  };
+
+  // Update product collection when products change
   useEffect(() => {
     setProductCollection(products);
   }, [products]);
 
+  // Apply filters when category, subcategory, or search changes
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory,search,showSearch]); // Ensure products are considered
+  }, [category, subCategory, search, showSearch]);
 
-  useEffect(()=>{
+  // Apply sorting when sort type changes
+  useEffect(() => {
     sortPrice();
-  },[sortType])
+  }, [sortType]);
 
   return (
-    <div className="grid md:grid-cols-[1fr_3fr]  pt-10 gap-6">
-      {/* Left side */}
+    <div className="grid md:grid-cols-[1fr_3fr] pt-10 gap-6">
+      {/* Left Side - Filters */}
       <div className="flex flex-col">
-        {/* FILTER HEADER WITH DROPDOWN ICON */}
-        <p
-          className=" text-xl flex items-center cursor-pointer gap-2 pt-2  "
-          onClick={() => setShowFilter(!showFilter)} // Toggle state on click
+        {/* <SearchBox/> */}
+        {/* FILTER HEADER */}
+        <button
+          className="flex items-center gap-2 text-xl font-semibold cursor-pointer md:hidden"
+          onClick={() => setShowFilter(!showFilter)}
         >
-          FILTERS
-          <img
-            className={`h-4 block sm:hidden transition-transform duration-300 ${
-              showFilter ? "rotate-90" : "rotate-0"
-            }`}
-            src="/src/assets/frontend_assets/dropdown_icon.png"
-            alt=""
-          />
-        </p>
+          <FaFilter />
+          Filters
+        </button>
 
-        {/* {showFilter */}
-        {/* md:flex for by default visible of category ant type  */}
-        <div
-          className={`flex flex-col md:pt-8 pt-3 gap-4 ${
-            showFilter ? "" : "hidden"
-          } md:flex `}
-        >
-          {/* CATEGORIES FILTER */}
-          <div
-            className={`border border-gray-300 px-4 py-3 flex flex-col gap-2 `}
-          >
+        {/* Filter Options */}
+        <div className={`md:flex flex-col gap-4 pt-3 transition-all duration-300 ${showFilter ? "block" : "hidden"}`}>
+          {/* Category Filter */}
+          <div className="border border-gray-300 p-4 rounded-md">
             <p className="font-medium text-sm">CATEGORIES</p>
-            <div className="flex flex-col gap-2 text-gray-500 text-sm py-1">
-              <label>
-                <input
-                  onChange={toggleCategory}
-                  className="mr-2"
-                  type="checkbox"
-                  name="category"
-                  value="Men"// should matched with label  eaxct spelling with [prodcuts]
-                />{" "}
-                Men
-              </label>
-              <label>
-                <input
-                  onChange={toggleCategory}
-                  className="mr-2"
-                  type="checkbox"
-                  name="category"
-                  value="Women"// should matched with label eaxct spelling with [prodcuts]
-                />{" "}
-                Women
-              </label>
-              <label>
-                <input
-                  onChange={toggleCategory}
-                  className="mr-2"
-                  type="checkbox"
-                  name="category"
-                  value="Kids"// should matched with label eaxct spelling with [prodcuts]
-                />{" "}
-                Kids
-              </label>
+            <div className="flex flex-col gap-2 text-gray-600 text-sm mt-2">
+              {["Men", "Women", "Kids"].map((cat) => (
+                <label key={cat}>
+                  <input onChange={toggleCategory} className="mr-2" type="checkbox" value={cat} /> {cat}
+                </label>
+              ))}
             </div>
           </div>
 
-          {/* TYPE FILTER */}
-          <div
-            className={`border border-gray-300 px-4 py-3 flex flex-col gap-2   `}
-          >
+          {/* Type Filter */}
+          <div className="border border-gray-300 p-4 rounded-md">
             <p className="font-medium text-sm">TYPE</p>
-            <div className="flex flex-col gap-2 text-gray-500 text-sm py-1">
-              <label>
-                <input
-                  onChange={toggleSubCategory}
-                  className="mr-2"
-                  type="checkbox"
-                  name="type"
-                  value="Topwear"// should matched with label eaxct spelling with [prodcuts]
-                />{" "}
-                Topwear
-              </label>
-              <label>
-                <input
-                  onChange={toggleSubCategory}
-                  className="mr-2"
-                  type="checkbox"
-                  name="type"
-                  value="Bottomwear"// should matched with label eaxct spelling with [prodcuts]
-                />{" "}
-                Bottomwear
-              </label>
-              <label>
-                <input
-                  onChange={toggleSubCategory}
-                  className="mr-2"
-                  type="checkbox"
-                  name="type"
-                  value="Winterwear"// should matched with label eaxct spelling with [prodcuts]
-                />{" "}
-                Winterwear
-              </label>
+            <div className="flex flex-col gap-2 text-gray-600 text-sm mt-2">
+              {["Topwear", "Bottomwear", "Winterwear"].map((type) => (
+                <label key={type}>
+                  <input onChange={toggleSubCategory} className="mr-2" type="checkbox" value={type} /> {type}
+                </label>
+              ))}
             </div>
           </div>
         </div>
-        {/* )} */}
       </div>
 
-      {/* Right side */}
-      <div className="">
+      {/* Right Side - Products */}
+      <div>
         <div className="flex items-center justify-between">
-          <div className="text-xl md:text-2xl">
-            <Title text1={"ALL"} text2={"COLLECTIONS"} />
-          </div>
+          <Title text1={"ALL"} text2={"COLLECTIONS"} />
 
-          <div className="mb-4 ">
-            {/* <label className="mr-2 font-semibold"></label> */}
-            <select  
-            onChange={(e)=>setSortType(e.target.value)}
-            className="border border-gray-300 px-1 text-base py-2   rounded-sm">
-              <option value="lowToHigh">Sort by: Relavent</option>
-              <option value="lowToHigh">Sort by: Low to High</option>
-              <option value="highToLow">Sort by: High to Low</option>
-            </select>
-          </div>
+          {/* Sorting Dropdown */}
+          <select
+            onChange={(e) => setSortType(e.target.value)}
+            className="border border-gray-300 px-2 py-2 rounded-md text-sm"
+          >
+            <option value="relevant">Sort by: Relevant</option>
+            <option value="lowToHigh">Sort by: Low to High</option>
+            <option value="highToLow">Sort by: High to Low</option>
+          </select>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {ProductCollection.map((item, index) => {
-            return (
+        {/* Product Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+          {productCollection.length > 0 ? (
+            productCollection.map((item) => (
               <ProductItems
-              onClick={() => handleClick(item._id)}
-                key={index}
+                key={item._id}
+                onClick={() => handleClick(item._id)}
                 id={item._id}
                 image={item.image}
                 name={item.name}
                 price={item.price}
               />
-            );
-          })}
+            ))
+          ) : (
+            <p className="col-span-full text-center text-gray-500">No products found.</p>
+          )}
         </div>
       </div>
     </div>
@@ -241,3 +175,4 @@ const Collection = () => {
 };
 
 export default Collection;
+                              

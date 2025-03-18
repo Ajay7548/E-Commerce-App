@@ -1,31 +1,46 @@
-import React from 'react'
-import { useShop } from '../context/ShopContext'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { useShop } from '../context/ShopContext';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-const ProductItems = ({id,name,image,price}) => {
+const ProductItems = ({ id, name, image, price }) => {
+  const { currency } = useShop();
 
-    //currency should be in oject 
-    const {currency} = useShop()
-    
-    
-    const handleClick = () => {
-          // Scroll to the top of the page
-          window.scrollTo(0, 0);
-          // Navigate to the product page or perform any other actions
-    };
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
-    <Link to={`/Product/${id}`} className='text-gray-700 cursor-pointer'>
-        <div className='overflow-hidden'>
-          {/* hoverscale:100 will big imag slightly */}
-            <img  
-            onClick={handleClick}
-            className='hover:scale-110 transi ease-in-out ' src={image[0]} alt="" />
-        </div>
-        <p className='pt-2 pb-1 text-sm'>{name}</p>
-        <p className='text-sm font-medium'>{currency}{price}</p>
-    </Link>
-  )
-}
+    <Link 
+      to={`/Product/${id}`} 
+      className="text-gray-800 cursor-pointer"
+    >
+      <motion.div 
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+        className="relative overflow-hidden bg-white shadow-md rounded-2xl p-4 hover:shadow-lg transition-all duration-300"
+      >
+        {/* Image Section */}
+        <motion.img
+          onClick={handleClick}
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.3 }}
+          className="rounded-xl w-full h-auto object-cover transition-transform"
+          src={image[0]}
+          alt={name}
+          loading="lazy"
+        />
+      </motion.div>
 
-export default ProductItems
+      {/* Product Details */}
+      <div className="mt-2 text-center">
+        <p className="text-base font-medium">{name}</p>
+        <p className="text-lg font-semibold text-blue-500">
+          {currency}{price}
+        </p>
+      </div>
+    </Link>
+  );
+};
+
+export default ProductItems;
