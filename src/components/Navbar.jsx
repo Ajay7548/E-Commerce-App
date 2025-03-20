@@ -21,18 +21,18 @@ const Navbar = () => {
         <motion.img
           src={darkMode ? blaclogo : whiteLogo} // Correctly switching logos
           alt="logo"
-          className="h-12" // Keeping className only for styling
+          className="h-10" // Keeping className only for styling
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         />
         <motion.p
-          className="text-xl text-gray-700 dark:text-gray-300 pt-2 font-medium logo"
+          className="lg:text-2xl text-xl mb-2  text-gray-700 dark:text-gray-300 pt-2 font-semibold logo"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          TRENDHIVE
+          TRENDHIVE.
         </motion.p>
       </Link>
 
@@ -54,7 +54,7 @@ const Navbar = () => {
       </ul>
 
       {/* Icons */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-1 lg:gap-4">
         {/* Search Icon */}
         <motion.div
           onClick={() => setShowSearch(true)}
@@ -62,7 +62,7 @@ const Navbar = () => {
           transition={{ duration: 0.2 }}
           className="h-6 cursor-pointer"
         >
-          <Search className={`w-5 h-6 ${darkMode ? "text-white" : "text-black"}`} />
+          <Search className={`w-5 hidden lg:block h-6 ${darkMode ? "text-white" : "text-black"}`} />
         </motion.div>
 
         {/* Profile Icon */}
@@ -71,14 +71,14 @@ const Navbar = () => {
             whileHover={{ scale: 1.1 }}
             className="cursor-pointer"
           >
-            <User className={`w-5 h-5 ${darkMode ? "text-white" : "text-black"}`} />
+            <User className={`w-4 h-5 lg:w-6 lg:h-6 ${darkMode ? "text-white" : "text-black"}`} />
           </motion.div>
         </Link>
 
         {/* Cart Icon */}
         <Link to="/Cart" className="relative">
           <motion.div whileHover={{ scale: 1.1 }}>
-            <ShoppingCart className={`w-5 h-5 ${darkMode ? "text-white" : "text-black"}`} />
+            <ShoppingCart className={`w-4 h-5 lg:w-6 lg:h-6 ${darkMode ? "text-white" : "text-black"}`} />
           </motion.div>
           <motion.p
             className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]"
@@ -90,11 +90,7 @@ const Navbar = () => {
           </motion.p>
         </Link>
 
-        {/* Dark Mode Toggle */}
-        <div onClick={() => setDarkMode(!darkMode)} className="cursor-pointer flex">
-          {/* {darkMode ? <span className="flex items-center border p-1.5 rounded-lg gap-2 text-black dark:text-white"><Sun className="w-5 h-5 text-white" />Light Mode</span> : <span className="flex items-center gap-2 text-black dark:text-white"><MoonIcon className="w-5 h-5 text-black" />Dark Mode</span>} */}
-          {darkMode ? <span className="p-2 bg-gray-700 rounded-full"><Sun className="text-white"/></span> :<span className="p-2 bg-gray-200 rounded-full"><Moon className="text-black"/></span>}
-        </div>
+        
 
         {/* Mobile Menu Icon */}
         <motion.div
@@ -104,6 +100,12 @@ const Navbar = () => {
         >
           <Menu className={`w-5 h-5 ${darkMode ? "text-white" : "text-black"}`} />
         </motion.div>
+
+        {/* Dark Mode Toggle */}
+        <div onClick={() => setDarkMode(!darkMode)} className="cursor-pointer flex">
+          {/* {darkMode ? <span className="flex items-center border p-1.5 rounded-lg gap-2 text-black dark:text-white"><Sun className="w-5 h-5 text-white" />Light Mode</span> : <span className="flex items-center gap-2 text-black dark:text-white"><MoonIcon className="w-5 h-5 text-black" />Dark Mode</span>} */}
+          {darkMode ? <span className="p-1 lg:p-2 bg-gray-700 rounded-full"><Sun className="text-white w-4 h-4 lg:h-6 lg:w-6"/></span> :<span className="p-1 lg:p-2 bg-gray-300 rounded-full"><Moon className="text-black w-4 h-4 lg:h-6 lg:w-6"/></span>}
+        </div>
       </div>
 
       {/* Sidebar Menu */}

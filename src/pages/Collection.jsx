@@ -101,15 +101,15 @@ const Collection = () => {
         {/* <SearchBox/> */}
         {/* FILTER HEADER */}
         <button
-          className="flex items-center gap-2 text-xl font-semibold cursor-pointer md:hidden"
+          className="flex items-center dark:text-white text-blackgap-2 text-2xl font-semibold cursor-pointer md:hidden"
           onClick={() => setShowFilter(!showFilter)}
         >
-          <FaFilter />
+          <FaFilter className="dark:text-white text-black" />
           Filters
         </button>
 
         {/* Filter Options */}
-        <div className={`md:flex flex-col gap-4 pt-3 transition-all duration-300 ${showFilter ? "block" : "hidden"}`}>
+        <div className={`md:flex  flex-col gap-4 pt-3 transition-all duration-300 ${showFilter ? "block" : "hidden"}`}>
           {/* Category Filter */}
           <div className="border dark:border-gray-800 border-gray-300 px-4 py-6 rounded-md">
             <p className="font-mdeium text-black dark:text-white text-lg">CATEGORIES</p>
@@ -137,14 +137,14 @@ const Collection = () => {
       </div>
 
       {/* Right Side - Products */}
-      <div>
-        <div className="flex items-center justify-between">
-          <Title text1={"ALL"} text2={"COLLECTIONS"} />
+      <div className="">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <Title text1={"ALL"} text2={"COLLECTIONS"} />
 
           {/* Sorting Dropdown */}
           <select
             onChange={(e) => setSortType(e.target.value)}
-            className="border dark:border-gray-700 dark:text-white border-gray-300 px-2 py-2 rounded-md text-sm"
+            className="border  dark:border-gray-700 dark:text-white border-gray-300 px-2 py-2 rounded-md text-sm"
           >
             <option value="relevant " className=" dark:bg-gray-900">Sort by: Relevant</option>
             <option value="lowToHigh " className=" dark:bg-gray-900">Sort by: Low to High</option>

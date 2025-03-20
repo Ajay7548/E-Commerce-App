@@ -75,7 +75,7 @@ const PlaceOrder = () => {
         <div className=' flex justify-end '>
         <button
         onClick={()=>navigate('/Order')}
-        className="bg-black py-3 mt-6 px-16 text-sm  text-white rounded-sm cursor-pointer hover:bg-gray-800">PLACE ORDER</button>
+        className="bg-gray-800 py-3 mt-6 px-16 text-sm  text-white rounded-sm cursor-pointer hover:bg-gray-900">PLACE ORDER</button>
         </div>
         </div>
       </div>

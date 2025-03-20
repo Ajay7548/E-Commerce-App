@@ -83,16 +83,16 @@ const Product = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h1 className="text-4xl font-bold dark:text-white text-gray-800">{productData.name}</h1>
+          <h1 className="lg:text-4xl text-2xl font-bold dark:text-white text-gray-800">{productData.name}</h1>
           <div className="flex items-center gap-1">
             {[...Array(4)].map((_, i) => (
-              <img key={i} src={assets.star_icon} alt="Star" className="w-5" />
+              <img key={i} src={assets.star_icon} alt="Star" className="lg:w-5 w-4" />
             ))}
-            <img src={assets.star_dull_icon} alt="Star" className="w-5 opacity-50" />
+            <img src={assets.star_dull_icon} alt="Star" className="lg:w-5 w-4 opacity-50" />
             <p className="text-sm pl-2 dark:text-gray-200 text-gray-500">(122 reviews)</p>
           </div>
-          <p className="text-3xl font-extrabold text-blue-600">{currency}{productData.price}</p>
-          <p className="text-gray-600 dark:text-gray-200 text-lg leading-relaxed">{productData.description}</p>
+          <p className="lg:text-3xl text-2xl font-extrabold text-blue-600">{currency}{productData.price}</p>
+          <p className="text-gray-600 dark:text-gray-200 lg:text-lg leading-relaxed">{productData.description}</p>
 
           <div className="mt-5">
             <p className="text-lg font-medium">Select Size:</p>
@@ -101,7 +101,7 @@ const Product = () => {
                 <button
                   key={index}
                   onClick={() => setSize(item)}
-                  className={`border px-5 py-2 text-lg font-medium rounded-lg transition-all ${
+                  className={`border px-5  py-2 lg:text-lg text-sm font-medium rounded-lg transition-all ${
                     item === size
                       ? "border-blue-500 bg-blue-100 text-blue-700 shadow-md"
                       : "border-gray-300 bg-gray-100 hover:bg-gray-200"
@@ -115,7 +115,7 @@ const Product = () => {
 
           <motion.button
             onClick={() => addToCart(productData._id, size)}
-            className="w-1/2 px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-black to-gray-900 hover:from-gray-900 hover:to-black transition-all rounded-lg shadow-lg"
+            className="lg:w-1/2 w-full px-8 py-3 hover:bg-gray-800 cursor-pointer lg:text-lg  text-sm font-semibold text-white bg-black transition-all rounded-lg shadow-lg"
             whileTap={{ scale: 0.95 }}
           >
             ADD TO CART

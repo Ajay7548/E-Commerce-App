@@ -55,7 +55,7 @@ const Cart = () => {
                 key={index}
                 className="text-gray-700 dark:text-gray-300 my-4 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center"
               >
-                <div className="flex gap-6 items-center">
+                <div className="flex gap-2 lg:gap-6 items-center">
                   <img
                     className="w-16 sm:w-20"
                     src={productData.image[0]}
@@ -66,7 +66,7 @@ const Cart = () => {
                       {productData.name}
                     </p>
                     <div className="flex items-center gap-5 mt-2">
-                      <p className="font-medium text-lg">
+                      <p className="font-medium  lg:text-lg">
                         {currency}
                         {productData.price}
                       </p>
@@ -104,7 +104,7 @@ const Cart = () => {
       </div>
 
       {/* Right: Cart Totals (Using the new component) */}
-          <div className="w-1/2">
+          <div className="w-full">
           <CartTotal subtotal={subtotal} currency={currency} navigate={navigate} />
           </div>
     </div>
