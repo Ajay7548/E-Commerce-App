@@ -1,6 +1,7 @@
 # 🛒 E-Commerce App
 
-<img width="949" alt="ecomm" src="https://github.com/user-attachments/assets/47ec1cb6-c0a4-487b-aae5-8b31c488c988" />
+<img width="941" alt="ecomm" src="https://github.com/user-attachments/assets/8c4912f6-c580-4b19-8d63-013fa8059aff" />
+
 
 ## ✨ Overview
 A modern, feature-rich E-Commerce platform built with cutting-edge technologies to provide a seamless shopping experience.
@@ -11,17 +12,12 @@ A modern, feature-rich E-Commerce platform built with cutting-edge technologies 
 - ❤️ **Wishlist & Favorites** – Save products for later.
 - 🛒 **Cart & Checkout** – Smooth shopping experience with secure payment integration.
 - 📦 **Order Tracking** – Keep track of your purchases.
-- 🏪 **Admin Dashboard** – Manage products, orders, and users efficiently.
 - 🌐 **Responsive Design** – Optimized for all screen sizes.
 
 ## 🛠️ Tech Stack
 - **Frontend**: React, Vite, Tailwind CSS
-- **State Management**: Redux Toolkit / Context API
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB / PostgreSQL
-- **Authentication**: Firebase / JWT
-- **Payment Integration**: Stripe / Razorpay
-- **Deployment**: Vercel / Netlify / Render
+- **State Management**: Context API
+- **Deployment**: Render
 
 ## 📦 Installation & Setup
 ```sh
@@ -43,8 +39,10 @@ npm run dev
 4. Track your orders from the dashboard.
 
 ## 📸 Screenshots
-<img width="814" alt="product" src="https://github.com/user-attachments/assets/59522a25-cf2f-45fc-ab49-68174fea76eb" />
-<img width="816" alt="items" src="https://github.com/user-attachments/assets/a391a995-b73c-4df0-b278-a671dbd44c86" />
+<img width="938" alt="e-commDark" src="https://github.com/user-attachments/assets/a3731844-18b9-4430-a285-fdef2d11bdfa" />
+<img width="932" alt="collect" src="https://github.com/user-attachments/assets/59237967-cbc5-4424-92b7-83a33830a557" />
+<img width="360" alt="e0comm-mob" src="https://github.com/user-attachments/assets/cb214f3e-6f9e-452c-915f-df647f1511d1" />
+
 
 ## 🚀 Deployment
 ```sh
