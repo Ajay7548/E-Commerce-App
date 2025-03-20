@@ -11,21 +11,22 @@ const ProductItems = ({ id, name, image, price }) => {
   };
 
   return (
-    <Link 
+    <div className='hover:shadow-xl px-2 py-8 dark:shadow-gray-700 transition-all duration-300'>
+      <Link 
       to={`/Product/${id}`} 
-      className="text-gray-800 cursor-pointer"
+      className="text-gray-800 dark:text-gray-300 cursor-pointer"
     >
       <motion.div 
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
-        className="relative overflow-hidden bg-white shadow-md rounded-2xl p-4 hover:shadow-lg transition-all duration-300"
+        className="relative overflow-hidden p-1 dark:bg-gray-800 bg-white shadow-md rounded  "
       >
         {/* Image Section */}
         <motion.img
           onClick={handleClick}
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.3 }}
-          className="rounded-xl w-full h-auto object-cover transition-transform"
+          className="rounded-lg w-full h-auto object-cover transition-transform"
           src={image[0]}
           alt={name}
           loading="lazy"
@@ -40,6 +41,7 @@ const ProductItems = ({ id, name, image, price }) => {
         </p>
       </div>
     </Link>
+    </div>
   );
 };
 

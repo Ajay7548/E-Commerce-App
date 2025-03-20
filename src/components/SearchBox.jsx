@@ -58,9 +58,9 @@ const SearchBox = () => {
         onChange={(e) => setQuery(e.target.value)}
         className="border px-3 py-2 rounded-md"
       />
-      <button onClick={handleSearch} className="bg-black text-white px-4 py-2 rounded-md">
-        Search
-      </button>
+       <button className="bg-black dark:bg-gray-800 text-white text-sm font-medium px-6 py-3 transition duration-300 hover:bg-gray-600">
+            SUBSCRIBE
+          </button>
     </div>
   );
 };

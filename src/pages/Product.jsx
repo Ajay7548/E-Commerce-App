@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useShop } from "../context/ShopContext";
@@ -52,7 +51,7 @@ const Product = () => {
           <motion.img
             src={image}
             alt={productData.name}
-            className="w-full sm:w-[500px] h-auto rounded-lg shadow-lg transition-all hover:scale-105 duration-300"
+            className="w-3/4 sm:w-[400px] h-auto rounded-lg shadow-lg transition-all hover:scale-105 duration-300"
             key={image}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -79,21 +78,21 @@ const Product = () => {
 
         {/* Product Details */}
         <motion.div
-          className="flex-1 space-y-4 bg-white bg-opacity-80 p-6 rounded-lg shadow-lg backdrop-blur-lg"
+          className="flex-1 space-y-4 bg-white dark:bg-gray-900 bg-opacity-80 p-6 rounded-lg shadow-lg backdrop-blur-lg"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h1 className="text-4xl font-bold text-gray-800">{productData.name}</h1>
+          <h1 className="text-4xl font-bold dark:text-white text-gray-800">{productData.name}</h1>
           <div className="flex items-center gap-1">
             {[...Array(4)].map((_, i) => (
               <img key={i} src={assets.star_icon} alt="Star" className="w-5" />
             ))}
             <img src={assets.star_dull_icon} alt="Star" className="w-5 opacity-50" />
-            <p className="text-sm pl-2 text-gray-600">(122 reviews)</p>
+            <p className="text-sm pl-2 dark:text-gray-200 text-gray-500">(122 reviews)</p>
           </div>
           <p className="text-3xl font-extrabold text-blue-600">{currency}{productData.price}</p>
-          <p className="text-gray-600 text-lg leading-relaxed">{productData.description}</p>
+          <p className="text-gray-600 dark:text-gray-200 text-lg leading-relaxed">{productData.description}</p>
 
           <div className="mt-5">
             <p className="text-lg font-medium">Select Size:</p>
@@ -122,7 +121,7 @@ const Product = () => {
             ADD TO CART
           </motion.button>
 
-          <div className="text-gray-600 text-sm mt-4 space-y-2">
+          <div className="text-gray-600 dark:text-gray-200 text-sm mt-4 space-y-2">
             <hr className="my-4 border-gray-300" />
             <p>✅ 100% Original product</p>
             <p>🚚 Cash on delivery available</p>
@@ -133,7 +132,7 @@ const Product = () => {
 
       {/* Description & Review Section */}
       <motion.div
-        className="mt-10 border-t pt-6 bg-white p-6 rounded-lg shadow-lg"
+        className="mt-10  pt-6 dark:bg-gray-900 dark:shadow-gray-800  sadow-md bg-white p-6 rounded-lg shadow-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
@@ -142,14 +141,14 @@ const Product = () => {
           <p className="border-b-4 border-blue-500 pb-2 text-blue-600 cursor-pointer">
             Description
           </p>
-          <p className="text-gray-600 cursor-pointer hover:text-gray-800 transition">
+          <p className="text-gray-600 cursor-pointer dark:text-gray-200 hover:text-gray-800 transition">
             Review (122)
           </p>
         </div>
-        <p className="text-gray-700 mt-4 leading-relaxed">
+        <p className="text-gray-700 dark:text-gray-300 mt-4 leading-relaxed">
           E-commerce websites facilitate online buying and selling, offering convenience, accessibility, and a global marketplace.
         </p>
-        <p className="text-gray-700 mt-2 leading-relaxed">
+        <p className="text-gray-700 dark:text-gray-300 mt-2 leading-relaxed">
           These platforms showcase products with detailed descriptions, images, prices, and customer reviews, enhancing user experience.
         </p>
       </motion.div>

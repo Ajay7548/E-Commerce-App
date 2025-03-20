@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Ovo&family=Prata&display=swap');
 
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+
 
 a.active hr{
     display: block;
@@ -8,6 +11,7 @@ a.active hr{
 
 *{
     font-family: 'Outfit';
+    /* background-color: black; */
 }
 
 .prata-regular{

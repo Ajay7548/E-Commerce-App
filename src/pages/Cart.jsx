@@ -53,7 +53,7 @@ const Cart = () => {
             return (
               <div
                 key={index}
-                className="text-gray-700 my-4 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center"
+                className="text-gray-700 dark:text-gray-300 my-4 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center"
               >
                 <div className="flex gap-6 items-center">
                   <img
@@ -70,7 +70,7 @@ const Cart = () => {
                         {currency}
                         {productData.price}
                       </p>
-                      <p className="cursor-pointer text-center w-10 sm:py-1 border bg-gray-50">
+                      <p className="cursor-pointer text-center w-10 sm:py-1 border dark:bg-gray-800 bg-gray-50">
                         {item.size}
                       </p>
                     </div>
@@ -89,6 +89,7 @@ const Cart = () => {
                     min={1}
                     defaultValue={item.quantity}
                   />
+                  
                   <img
                     onClick={() => updateQuantity(item._id, item.size, 0)}
                     className="h-6 cursor-pointer"

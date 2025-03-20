@@ -19,23 +19,23 @@ const PlaceOrder = () => {
           <Title text1={'DELIVERY'} text2={'INFORMATION'} />
         </div>
         {/* ✅ Ensure the container has a set width and padding */}
-        <div className=" px-6 py-12 w-full max-w-[600px] mx-auto rounded-md shadow-md">
+        <div className=" px-6 py-12 w-full max-w-[600px] mx-auto rounded-md shadow-lg dark:shadow-gray-700">
           <div className="flex flex-col gap-4">
             <div className="flex gap-4">
-              <input className="border border-gray-400 px-3 py-2 w-full" type="text" placeholder="First name" />
-              <input className="border border-gray-400 px-3 py-2 w-full" type="text" placeholder="Last name" />
+              <input className="border placeholder-gray-500 border-gray-400 px-3 py-2 w-full" type="text" placeholder="First name" />
+              <input className="border placeholder-gray-500 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Last name" />
             </div>
-            <input className="border border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Email address" />
-            <input className="border border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Street" />
+            <input className="border placeholder-gray-500 border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Email address" />
+            <input className="border placeholder-gray-500 border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Street" />
 
             <div className="flex gap-4">
-              <input className="border border-gray-400 px-3 py-2 w-full" type="text" placeholder="City" />
-              <input className="border border-gray-400 px-3 py-2 w-full" type="text" placeholder="State" />
+              <input className="border placeholder-gray-500 border-gray-400 px-3 py-2 w-full" type="text" placeholder="City" />
+              <input className="border placeholder-gray-500 border-gray-400 px-3 py-2 w-full" type="text" placeholder="State" />
             </div>
 
             <div className="flex gap-4">
-              <input className="border border-gray-400 px-3 py-2 w-full" type="text" placeholder="Zipcode" />
-              <input className="border border-gray-400 px-3 py-2 w-full" type="text" placeholder="Country" />
+              <input className="border placeholder-gray-500 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Zipcode" />
+              <input className="border placeholder-gray-500 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Country" />
             </div>
 
             <input className="border border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Phone" />
@@ -52,24 +52,24 @@ const PlaceOrder = () => {
       <div className='mt-12 '>
         <Title text1={'PAYMENT'} text2={'METHOD'} />
 
-        <div className='flex gap-3  flex-col lg:flex-row px-2 py-4 justify-center shadow-md'>
-          <div className='flex items-center gap-5 px-2 py-4 cursor-pointer border border-gray-200'>
+        <div className='flex gap-3  flex-col lg:flex-row px-2 py-4 justify-center dark:shadow-gray-700 shadow-md'>
+          <div className='flex items-center gap-5 px-2 py-4 cursor-pointer border dark:border-gray-700 border-gray-200'>
             <p 
             onClick={()=>setMethod('stripe')}
             className={`min-w-3.5 h-3.5 border border-gray-300 rounded-full ${method === 'stripe' ?  'bg-green-400' : ""} `}></p>
             <img className='h-5' src="/src/assets/stripe_logo.png" alt="" />
           </div>
-          <div  className='flex items-center gap-5 px-2 py-4 cursor-pointer border border-gray-200'>
+          <div  className='flex items-center gap-5 px-2 py-4 cursor-pointer border dark:border-gray-700 border-gray-200'>
             <p 
             onClick={()=>setMethod('razorpay')}
             className={`min-w-3.5 h-3.5 border border-gray-300 rounded-full ${method  === 'razorpay' ? "bg-green-400" : ""} `}></p>
             <img className='h-5'  src="/src/assets/razorpay_logo.png" alt="" />
           </div>
-          <div className='flex items-center gap-5 px-2 py-4 cursor-pointer border border-gray-200'>
+          <div className='flex items-center gap-5 px-2 py-4 cursor-pointer border dark:border-gray-700 border-gray-200'>
             <p 
             onClick={()=>setMethod('cod')}
             className={`min-w-3.5 h-3.5 border border-gray-300 rounded-full ${method === 'cod' ?  'bg-green-400' : ""} `}></p>
-            <p className='text-gray-600 text-sm'>CASH ON DELIVERY</p>
+            <p className='text-gray-500 dar text-sm'>CASH ON DELIVERY</p>
           </div>
         </div>
         <div className=' flex justify-end '>

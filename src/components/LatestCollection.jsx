@@ -21,7 +21,7 @@ const LatestCollection = () => {
       <div className="text-center text-3xl py-8">
         {/* this text can be use anywhere providig text value  */}
         <Title text1={"LATEST"} text2={"COLLECTIONS"} />
-        <p className="w-3/4  m-auto text-xs sm:text-sm md:text-base text-gray-600">
+        <p className="w-3/4  m-auto text-xs sm:text-sm md:text-base dark:text-white text-gray-600">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
           modi.
         </p>
