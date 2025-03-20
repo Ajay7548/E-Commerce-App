@@ -19,7 +19,7 @@ const Navbar = () => {
       {/* Logo */}
       <Link to="/" className="flex items-center gap-1">
         <motion.img
-          src={darkMode ? whiteLogo : blaclogo} // Correctly switching logos
+          src={darkMode ? blaclogo : whiteLogo} // Correctly switching logos
           alt="logo"
           className="h-12" // Keeping className only for styling
           initial={{ opacity: 0, y: -20 }}

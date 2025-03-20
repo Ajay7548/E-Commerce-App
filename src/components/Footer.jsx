@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
-import logo_whiteedit from '../assets/logo_whiteedit.png';
+import whiteLogo from "../assets/whiteLogo.png";
+import blaclogo from "../assets/blaclogo.png";
+import { useDarkMode } from "../context/ThemeContext";
 
 const Footer = () => {
+
+  const {darkMode} =useDarkMode()
   return (
     <div className=" pt-16 pb-6">
       <div className="container mx-auto px-6">
@@ -12,7 +16,7 @@ const Footer = () => {
           {/* Logo & About Section */}
           <div>
             <Link to="/" className="flex items-center gap-2 pb-4">
-              <img src={logo_whiteedit} alt="TrendHive Logo" className="h-12" />
+              <img src={darkMode? blaclogo : whiteLogo } alt="TrendHive Logo" className="h-12" />
               <p className="text-2xl font-bold text-gray-700 dark:text-white">TRENDHIVE</p>
             </Link>
             <p className=" dark:text-white text-gray-600 leading-relaxed max-w-md">
