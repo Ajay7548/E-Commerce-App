@@ -17,13 +17,13 @@ const Hero = () => {
         transition={{ duration: 0.8, delay: 0.2 }} 
         className="w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0"
       >
-        <div className="dark:text-gray-300 text-gray-800">
+        <div className="dark:text-gray-300  text-gray-800">
           <div className="flex items-center gap-2">
             <p className="w-8 md:w-11 h-[2px] bg-gray-500"></p>
-            <p className="font-medium">OUR BESTSELLERS</p>
+            <p className="font-medium ">OUR BESTSELLERS</p>
           </div>
 
-          <h1 className="prata-regular text-3xl sm:py-3 lg:text-[40px] leading-relaxed">
+          <h1 className="prata-regular  text-2xl lg:text-3xl sm:py-3 lg:text-[40px] leading-relaxed">
             LATEST ARRIVALS
           </h1>
 

@@ -27,7 +27,7 @@ const Navbar = () => {
           transition={{ duration: 0.5 }}
         />
         <motion.p
-          className="lg:text-2xl text-xl mb-2  text-gray-700 dark:text-gray-300 pt-2 font-semibold logo"
+          className="lg:text-2xl text-xl   text-gray-700 dark:text-gray-300 pt-2 font-semibold logo"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -71,14 +71,14 @@ const Navbar = () => {
             whileHover={{ scale: 1.1 }}
             className="cursor-pointer"
           >
-            <User className={`w-4 h-5 lg:w-6 lg:h-6 ${darkMode ? "text-white" : "text-black"}`} />
+            <User className={`w-5 h-5 lg:w-6 lg:h-6 ${darkMode ? "text-white" : "text-black"}`} />
           </motion.div>
         </Link>
 
         {/* Cart Icon */}
         <Link to="/Cart" className="relative">
           <motion.div whileHover={{ scale: 1.1 }}>
-            <ShoppingCart className={`w-4 h-5 lg:w-6 lg:h-6 ${darkMode ? "text-white" : "text-black"}`} />
+            <ShoppingCart className={`w-5 h-5 lg:w-6 lg:h-6 ${darkMode ? "text-white" : "text-black"}`} />
           </motion.div>
           <motion.p
             className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]"
@@ -98,13 +98,13 @@ const Navbar = () => {
           whileHover={{ scale: 1.1 }}
           className="sm:hidden cursor-pointer"
         >
-          <Menu className={`w-5 h-5 ${darkMode ? "text-white" : "text-black"}`} />
+          <Menu className={`w-6 h-6 ${darkMode ? "text-white" : "text-black"}`} />
         </motion.div>
 
         {/* Dark Mode Toggle */}
         <div onClick={() => setDarkMode(!darkMode)} className="cursor-pointer flex">
           {/* {darkMode ? <span className="flex items-center border p-1.5 rounded-lg gap-2 text-black dark:text-white"><Sun className="w-5 h-5 text-white" />Light Mode</span> : <span className="flex items-center gap-2 text-black dark:text-white"><MoonIcon className="w-5 h-5 text-black" />Dark Mode</span>} */}
-          {darkMode ? <span className="p-1 lg:p-2 bg-gray-700 rounded-full"><Sun className="text-white w-4 h-4 lg:h-6 lg:w-6"/></span> :<span className="p-1 lg:p-2 bg-gray-300 rounded-full"><Moon className="text-black w-4 h-4 lg:h-6 lg:w-6"/></span>}
+          {darkMode ? <span className="p-2  bg-gray-700 rounded-full"><Sun className="text-white w-4 h-4 lg:h-6 lg:w-6"/></span> :<span className="p-2 bg-gray-300 rounded-full"><Moon className="text-black w-4 h-4 lg:h-6 lg:w-6"/></span>}
         </div>
       </div>
 

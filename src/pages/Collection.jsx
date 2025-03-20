@@ -4,7 +4,6 @@ import { useShop } from "../context/ShopContext";
 import ProductItems from "../components/ProductItems";
 import { useNavigate } from "react-router-dom";
 import { FaFilter } from "react-icons/fa"; // Filter Icon
-import SearchBox from "../components/SearchBox";
 
 const Collection = () => {
   const { products, search, showSearch } = useShop();
@@ -31,7 +30,25 @@ const Collection = () => {
     );
   };
 
-  // Apply Filters
+  // Sorting Function
+  const sortPrice = (productsToSort) => {
+    let sortedProducts = [...productsToSort];
+
+    switch (sortType) {
+      case "lowToHigh":
+        sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "highToLow":
+        sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        break;
+    }
+
+    return sortedProducts;
+  };
+
+  // Apply Filters and Sorting
   const applyFilter = () => {
     let filteredProducts = [...products];
 
@@ -52,31 +69,9 @@ const Collection = () => {
       filteredProducts = filteredProducts.filter((item) => subCategory.includes(item.subCategory));
     }
 
-    setProductCollection(filteredProducts);
-  };
-
-  // Sort Products by Price
-  const sortPrice = () => {
-    let sortedProducts = [...productCollection];
-
-    switch (sortType) {
-      case "lowToHigh":
-        sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case "highToLow":
-        sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-      default:
-        applyFilter();
-        return;
-    }
-
-    setProductCollection(sortedProducts);
-  };
-
-  // Navigate to Product Page
-  const handleClick = (id) => {
-    navigate(`/Product/${id}`);
+    // Apply sorting after filtering
+    const finalProducts = sortPrice(filteredProducts);
+    setProductCollection(finalProducts);
   };
 
   // Update product collection when products change
@@ -84,24 +79,18 @@ const Collection = () => {
     setProductCollection(products);
   }, [products]);
 
-  // Apply filters when category, subcategory, or search changes
+  // Apply filters and sorting when filters or search change
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, search, showSearch]);
-
-  // Apply sorting when sort type changes
-  useEffect(() => {
-    sortPrice();
-  }, [sortType]);
+  }, [category, subCategory, search, showSearch, sortType]);
 
   return (
     <div className="grid md:grid-cols-[1fr_3fr] pt-10 gap-6">
       {/* Left Side - Filters */}
       <div className="flex flex-col">
-        {/* <SearchBox/> */}
         {/* FILTER HEADER */}
         <button
-          className="flex items-center dark:text-white text-blackgap-2 text-2xl font-semibold cursor-pointer md:hidden"
+          className="flex items-center dark:text-white text-black gap-2 text-2xl font-semibold cursor-pointer md:hidden"
           onClick={() => setShowFilter(!showFilter)}
         >
           <FaFilter className="dark:text-white text-black" />
@@ -109,10 +98,10 @@ const Collection = () => {
         </button>
 
         {/* Filter Options */}
-        <div className={`md:flex  flex-col gap-4 pt-3 transition-all duration-300 ${showFilter ? "block" : "hidden"}`}>
+        <div className={`md:flex flex-col gap-4 pt-3 transition-all duration-300 ${showFilter ? "block" : "hidden"}`}>
           {/* Category Filter */}
           <div className="border dark:border-gray-800 border-gray-300 px-4 py-6 rounded-md">
-            <p className="font-mdeium text-black dark:text-white text-lg">CATEGORIES</p>
+            <p className="font-medium text-black dark:text-white text-lg">CATEGORIES</p>
             <div className="flex flex-col gap-2 dark:text-white text-gray-600 text-sm mt-2">
               {["Men", "Women", "Kids"].map((cat) => (
                 <label key={cat}>
@@ -124,7 +113,7 @@ const Collection = () => {
 
           {/* Type Filter */}
           <div className="border dark:border-gray-800 border-gray-300 px-4 py-6 rounded-md">
-            <p className="font-mdeium text-black dark:text-white text-lg">TYPE</p>
+            <p className="font-medium text-black dark:text-white text-lg">TYPE</p>
             <div className="flex flex-col gap-2 dark:text-white text-gray-600 text-sm mt-2">
               {["Topwear", "Bottomwear", "Winterwear"].map((type) => (
                 <label key={type}>
@@ -137,18 +126,18 @@ const Collection = () => {
       </div>
 
       {/* Right Side - Products */}
-      <div className="">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-      <Title text1={"ALL"} text2={"COLLECTIONS"} />
+      <div>
+        <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between gap-4">
+          <Title text1={"ALL"} text2={"COLLECTIONS"} />
 
           {/* Sorting Dropdown */}
           <select
             onChange={(e) => setSortType(e.target.value)}
-            className="border  dark:border-gray-700 dark:text-white border-gray-300 px-2 py-2 rounded-md text-sm"
+            className="border dark:border-gray-700 dark:text-white border-gray-300 px-2 py-2 rounded-md text-sm"
           >
-            <option value="relevant " className=" dark:bg-gray-900">Sort by: Relevant</option>
-            <option value="lowToHigh " className=" dark:bg-gray-900">Sort by: Low to High</option>
-            <option value="highToLow " className=" dark:bg-gray-900">Sort by: High to Low</option>
+            <option value="relevant" className="dark:bg-gray-900">Sort by: Relevant</option>
+            <option value="lowToHigh" className="dark:bg-gray-900">Sort by: Low to High</option>
+            <option value="highToLow" className="dark:bg-gray-900">Sort by: High to Low</option>
           </select>
         </div>
 
@@ -158,7 +147,7 @@ const Collection = () => {
             productCollection.map((item) => (
               <ProductItems
                 key={item._id}
-                onClick={() => handleClick(item._id)}
+                onClick={() => navigate(`/Product/${item._id}`)}
                 id={item._id}
                 image={item.image}
                 name={item.name}
@@ -166,7 +155,7 @@ const Collection = () => {
               />
             ))
           ) : (
-            <p className="col-span-full text-center  text-gray-500">No products found.</p>
+            <p className="col-span-full text-center text-gray-500">No products found.</p>
           )}
         </div>
       </div>
@@ -175,4 +164,3 @@ const Collection = () => {
 };
 
 export default Collection;
-                              
