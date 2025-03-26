@@ -3,6 +3,9 @@
 <img width="941" alt="ecomm" src="https://github.com/user-attachments/assets/8c4912f6-c580-4b19-8d63-013fa8059aff" />
 
 
+---
+🔗 **Live Demo**: [Live Preview](https://e-commerce-app-ss1q.onrender.com)
+
 ## ✨ Overview
 A modern, feature-rich E-Commerce platform built with cutting-edge technologies to provide a seamless shopping experience.
 
@@ -59,8 +62,6 @@ Deploy the `dist` folder to Vercel, Netlify, or any preferred hosting service.
 ## 📜 License
 This project is open-source under the MIT License.
 
----
-🔗 **Live Demo**: [Live Preview](https://e-commerce-app-ss1q.onrender.com)
 
 💡 Feel free to contribute by opening an issue or pull request!
 
