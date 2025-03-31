@@ -37,7 +37,7 @@ const Product = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="container mx-auto px-4 pt-10"
+      className="container mx-auto px-4 pt-24"
     >
       <div className="flex flex-col sm:flex-row gap-12">
         {/* Product Image Section */}

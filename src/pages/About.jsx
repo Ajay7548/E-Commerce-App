@@ -6,7 +6,7 @@ import about_img from '../assets/about_img.png'
 
 const About = () => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 pt-20">
       {/* Heading  */}
       <div className="text-2xl text-center py-6 ">
         <Title text1={"ABOUT"} text2={"US"} />

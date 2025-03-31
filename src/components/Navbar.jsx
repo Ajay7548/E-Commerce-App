@@ -13,10 +13,10 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { setShowSearch, getCartCount } = useShop();
   const { darkMode, setDarkMode } = useDarkMode();
-
+  
   return (
-    <nav className="flex items-center justify-between py-5 px-2 sm:px-[3vw] md:px-[4vw] lg:px-[9vw]  w-full dark:bg-black bg-white font-medium relative">
-      {/* Logo */}
+<nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between py-5 px-2 sm:px-[3vw] md:px-[4vw] lg:px-[9vw] dark:bg-black bg-white font-medium shadow-md">
+{/* Logo */}
       <Link to="/" className="flex items-center gap-1">
         <motion.img
           src={darkMode ? blaclogo : whiteLogo} // Correctly switching logos
@@ -56,14 +56,14 @@ const Navbar = () => {
       {/* Icons */}
       <div className="flex items-center gap-1 lg:gap-4">
         {/* Search Icon */}
-        <motion.div
+        {/* <motion.div
           onClick={() => setShowSearch(true)}
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.2 }}
           className="h-6 cursor-pointer"
         >
           <Search className={`w-5 hidden lg:block h-6 ${darkMode ? "text-white" : "text-black"}`} />
-        </motion.div>
+        </motion.div> */}
 
         {/* Profile Icon */}
         <Link to="/Login">

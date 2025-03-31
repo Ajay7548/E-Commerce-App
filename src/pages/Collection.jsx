@@ -85,7 +85,7 @@ const Collection = () => {
   }, [category, subCategory, search, showSearch, sortType]);
 
   return (
-    <div className="grid md:grid-cols-[1fr_3fr] pt-10 gap-6">
+    <div className="grid md:grid-cols-[1fr_3fr] pt-28 gap-6">
       {/* Left Side - Filters */}
       <div className="flex flex-col">
         {/* FILTER HEADER */}

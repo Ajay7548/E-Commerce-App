@@ -37,7 +37,7 @@ const Cart = () => {
   }, [cartItems, products]);
 
   return (
-    <div className="pt-14 flex flex-col lg:flex-row justify-between items-center gap-8">
+    <div className="pt-20 flex flex-col lg:flex-row justify-between items-center gap-8">
       {/* Left: Cart Items */}
       <div className="w-full  ">
         <div className="text-2xl my-4">

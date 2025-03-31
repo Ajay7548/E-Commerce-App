@@ -5,7 +5,7 @@ import contact_img from '../assets/contact_img.png'
 
 const Contact = () => {
   return (
-    <div className='md:px-[6%]'>
+    <div className='md:px-[6%] pt-20'>
 
         <div className='text-2xl text-center mt-10'>
           <Title text1={'CONTACT'} text2={'US'}/>

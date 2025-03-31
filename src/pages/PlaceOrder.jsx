@@ -12,10 +12,43 @@ const PlaceOrder = () => {
   const [cartData, setCartData] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [method, setMethod] = useState("cod");
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    street: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    country: "",
+    phone: "",
+  });
+  const [error, setError] = useState("");
+  const handleChange = (e) => {
+    setDeliveryInfo({ ...deliveryInfo, [e.target.name]: e.target.value });
+  };
+  const handlePlaceOrder = () => {
+    const { firstName, lastName, email, street, city, state, zipcode, country, phone } = deliveryInfo;
+
+    if (!firstName || !lastName || !email || !street || !city || !state || !zipcode || !country || !phone) {
+      setError("Please fill all delivery details before placing an order.");
+      return;
+    }
+    // If validation passes, navigate to order page
+    setOrderPlaced(true);
+    
+    // Hide the message after 3 seconds and navigate
+    setTimeout(() => {
+      setOrderPlaced(false);
+      navigate("/Order");
+    }, 3000);
+  };
+
 
   // Load last cart details
   useEffect(() => {
-    
+
     let tempData = [];
     let total = 0;
 
@@ -45,27 +78,79 @@ const PlaceOrder = () => {
   }, [cartItems, products]);
 
   return (
-    <div className="grid md:grid-cols-2 gap-6 p-6">
+    <div className="grid md:grid-cols-2 gap-6 p-6 pt-26">
+     {orderPlaced && (
+  <div className="fixed mx-auto top-20 bg-white p-4 rounded-lg shadow-lg border border-green-400 animate-fadeIn">
+    <p className="text-sm font-medium text-green-600">🎉 Order Successfully Placed!</p>
+  </div>
+)}
+
+
       {/* Left Side - Delivery Information */}
       <div className="w-full">
         <Title text1={"DELIVERY"} text2={"INFORMATION"} />
         <div className="px-6 py-12 w-full max-w-[600px] mx-auto rounded-md shadow-lg dark:shadow-gray-700">
           <div className="flex flex-col gap-4">
             <div className="flex gap-4">
-              <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="First name" />
-              <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Last name" />
+              <input
+                name="firstName"
+                value={deliveryInfo.firstName}
+                onChange={handleChange}
+
+                className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="First name" />
+              <input
+                name="lastName"
+                value={deliveryInfo.lastName}
+                onChange={handleChange}
+
+                className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Last name" />
             </div>
-            <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Email address" />
-            <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Street" />
+            <input
+              name="email"
+              value={deliveryInfo.email}
+              onChange={handleChange}
+
+              className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Email address" />
+            <input
+              name="street"
+              value={deliveryInfo.street}
+              onChange={handleChange}
+
+              className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Street" />
             <div className="flex gap-4">
-              <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="City" />
-              <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="State" />
+              <input
+                name="city"
+                value={deliveryInfo.city}
+                onChange={handleChange}
+
+                className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="City" />
+              <input
+                name="state"
+                value={deliveryInfo.state}
+                onChange={handleChange}
+
+                className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="State" />
             </div>
             <div className="flex gap-4">
-              <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Zipcode" />
-              <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Country" />
+              <input
+                name="zipcode"
+                value={deliveryInfo.zipcode}
+                onChange={handleChange}
+
+                className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Zipcode" />
+              <input
+                name="country"
+                value={deliveryInfo.country}
+                onChange={handleChange}
+
+                className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full" type="text" placeholder="Country" />
             </div>
-            <input className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Phone" />
+            <input
+              name="phone"
+              value={deliveryInfo.phone}
+              onChange={handleChange}
+
+              className="border placeholder-gray-400 border-gray-400 px-3 py-2 w-full block" type="text" placeholder="Phone" />
           </div>
         </div>
       </div>
@@ -115,9 +200,12 @@ const PlaceOrder = () => {
 
           {/* Place Order Button */}
           <div className="flex justify-end">
-            <button onClick={() => navigate("/Order")} className="bg-gray-800 py-3 mt-6 px-16 text-sm text-white rounded-sm cursor-pointer hover:bg-gray-900">
+            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+
+            <button onClick={handlePlaceOrder} className="bg-gray-800 py-3 mt-6 px-16 text-sm text-white rounded-sm cursor-pointer hover:bg-gray-900">
               PLACE ORDER
             </button>
+
           </div>
         </div>
       </div>
