@@ -80,7 +80,7 @@ const PlaceOrder = () => {
   return (
     <div className="grid md:grid-cols-2 gap-6 p-6 pt-26">
      {orderPlaced && (
-  <div className="fixed mx-auto top-20 bg-white p-4 rounded-lg shadow-lg border border-green-400 animate-fadeIn">
+  <div className="fixed right-36 top-50 bg-white p-4 rounded-lg shadow-lg border border-green-400 animate-fadeIn">
     <p className="text-sm font-medium text-green-600">🎉 Order Successfully Placed!</p>
   </div>
 )}
